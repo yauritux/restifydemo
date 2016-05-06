@@ -22,9 +22,17 @@ server.get({path: PATH + '/:jobId', version: '0.0.1'}, findJob);
 server.post({path: PATH, version: '0.0.1'}, postNewJob);
 server.del({path: PATH + '/:jobId', version: '0.0.1'}, deleteJob);
 
+server.get({path: PATH, version: '0.0.2'}, fetchAllJobs);
+
 server.listen(port, ip_addr, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
+
+function fetchAllJobs(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.send(200, {"job": "Software Architect", "location": "Jakarta"});
+  return next();
+}
 
 function findAllJobs(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
